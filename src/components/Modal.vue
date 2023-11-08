@@ -17,30 +17,39 @@ defineEmits(["nextClick"]);
 </script>
 <template>
     <Teleport to="body">
-        <div v-if="open" class="modal">
-            <div v-if="successful" class="container">
-                <SuccessIcon />
-                <div class="text">
-                    You answered correctly! Continue to next question?
+        <div v-if="open" class="background">
+            <div class="modal">
+                <div v-if="successful" class="container">
+                    <SuccessIcon />
+                    <div class="text">
+                        You answered correctly! Continue to next question?
+                    </div>
                 </div>
-            </div>
-            <div v-if="!successful" class="container">
-                <FailedIcon />
-                <div class="text">
-                    You answered incorrectly! Continue to next question?
+                <div v-if="!successful" class="container">
+                    <FailedIcon />
+                    <div class="text">
+                        You answered incorrectly! Continue to next question?
+                    </div>
                 </div>
+                <Button
+                    class="next-button"
+                    type="accept"
+                    @click="$emit('nextClick')"
+                >
+                    Next
+                </Button>
             </div>
-            <Button
-                class="next-button"
-                type="accept"
-                @click="$emit('nextClick')"
-            >
-                Next
-            </Button>
         </div>
     </Teleport>
 </template>
 <style scoped>
+.background {
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 100%;
+    background: rgba(119, 119, 119, 0.7);
+}
 .modal {
     position: absolute;
     top: 30%;
